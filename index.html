@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#07231a">
+<title>União FC · Copa Society 2026</title>
+<meta property="og:title" content="União FC · Copa Society 2026">
+<meta property="og:description" content="Próximo jogo, tabela completa, grupos e mata-mata.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Archivo:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  *{margin:0;padding:0;box-sizing:border-box}
+  :root{
+    --bg:#07231a;--bg2:#0b3226;--card:rgba(255,255,255,.05);--line:rgba(255,255,255,.1);
+    --gold:#f2c14e;--gold-soft:rgba(242,193,78,.15);--green:#37c978;--text:#f0f7f2;--muted:#94b8a7;
+    --display:'Bebas Neue',Impact,'Arial Narrow',sans-serif;--body:'Archivo',system-ui,-apple-system,Segoe UI,Roboto,sans-serif;
+  }
+  html{scroll-behavior:smooth;scroll-padding-top:70px;background:#07231a}
+  @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important;animation:none!important}}
+  body{font-family:var(--body);color:var(--text);min-height:100vh;
+    background:radial-gradient(ellipse 700px 420px at 90% -5%,rgba(55,201,120,.16),transparent 60%),
+      radial-gradient(ellipse 600px 500px at -10% 40%,rgba(242,193,78,.07),transparent 60%),
+      linear-gradient(170deg,var(--bg2) 0,var(--bg) 900px);background-color:var(--bg);background-repeat:no-repeat;
+    -webkit-font-smoothing:antialiased}
+  a{color:inherit}
+  button{font:inherit;color:inherit;cursor:pointer}
+  :focus-visible{outline:2px solid var(--gold);outline-offset:3px;border-radius:6px}
+  .wrap{max-width:1120px;margin:0 auto;padding:0 18px}
+
+  /* NAV */
+  nav{position:sticky;top:0;z-index:20;background:rgba(7,35,26,.88);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+  nav .wrap{display:flex;align-items:center;gap:6px;height:58px;overflow-x:auto;scrollbar-width:none}
+  nav .wrap::-webkit-scrollbar{display:none}
+  .brand{font-family:var(--display);font-size:24px;letter-spacing:1.5px;margin-right:auto;white-space:nowrap;padding-right:10px}
+  .brand b{color:var(--gold);font-weight:400}
+  nav a{text-decoration:none;font-size:14px;font-weight:700;letter-spacing:.5px;padding:8px 12px;border-radius:999px;white-space:nowrap;color:var(--muted)}
+  nav a:hover,nav a.on{color:var(--text);background:var(--card)}
+
+  /* HERO */
+  header{padding:34px 0 10px}
+  .eyebrow{font-size:13px;font-weight:800;letter-spacing:4px;text-transform:uppercase;color:var(--green)}
+  h1{font-family:var(--display);font-weight:400;font-size:clamp(56px,13vw,112px);line-height:.9;letter-spacing:2px;margin-top:8px}
+  h1 span{color:var(--gold)}
+  .lede{color:var(--muted);font-weight:600;margin-top:10px;font-size:15px}
+
+  .grid{display:grid;gap:18px;margin-top:26px}
+  @media(min-width:900px){.grid{grid-template-columns:1.25fr 1fr}}
+
+  .card{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:22px}
+  .card h2{font-family:var(--display);font-weight:400;font-size:28px;letter-spacing:1.5px;margin-bottom:14px;display:flex;align-items:center;gap:10px}
+  .card h2 small{font-family:var(--body);font-size:12px;font-weight:700;letter-spacing:1.5px;color:var(--muted);text-transform:uppercase;margin-left:auto}
+
+  /* NEXT MATCH */
+  .next{position:relative;overflow:hidden;background:linear-gradient(150deg,rgba(242,193,78,.2),rgba(242,193,78,.04) 60%);border-color:rgba(242,193,78,.4)}
+  .next .tag{display:inline-block;background:var(--gold);color:#1d1503;font-weight:800;font-size:12px;letter-spacing:2px;padding:5px 10px;border-radius:7px;text-transform:uppercase}
+  .vs{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:10px;margin:22px 0 18px;text-align:center}
+  .vs .t{font-family:var(--display);font-size:clamp(28px,8vw,44px);line-height:1;letter-spacing:1px}
+  .vs .t.me{color:var(--gold)}
+  .vs .x{font-family:var(--display);font-size:22px;color:var(--green)}
+  .when{display:flex;flex-wrap:wrap;justify-content:center;gap:8px 18px;color:var(--muted);font-weight:700;font-size:14px}
+  .when b{color:var(--text)}
+  .count{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin:20px 0}
+  .count div{background:rgba(0,0,0,.22);border-radius:12px;padding:10px 4px;text-align:center}
+  .count b{display:block;font-family:var(--display);font-size:clamp(30px,9vw,44px);font-weight:400;line-height:1;color:var(--gold)}
+  .count span{font-size:11px;font-weight:700;letter-spacing:1.5px;color:var(--muted);text-transform:uppercase}
+  .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;width:100%;background:var(--gold);color:#1d1503;border:0;border-radius:12px;padding:13px 16px;font-weight:800;font-size:15px;text-decoration:none}
+  .btn.ghost{background:transparent;color:var(--text);border:1px solid var(--line)}
+  .btns{display:grid;gap:8px}
+  @media(min-width:520px){.btns{grid-template-columns:1fr 1fr}}
+
+  /* ROUTE (campanha) */
+  .route{list-style:none;position:relative}
+  .route li{position:relative;padding:0 0 18px 30px}
+  .route li:before{content:"";position:absolute;left:8px;top:6px;bottom:-6px;width:2px;background:var(--line)}
+  .route li:last-child:before{display:none}
+  .route li:after{content:"";position:absolute;left:2px;top:4px;width:14px;height:14px;border-radius:50%;border:2px solid var(--gold);background:var(--bg)}
+  .route li.done:after{background:var(--green);border-color:var(--green)}
+  .route li.now:after{background:var(--gold);box-shadow:0 0 0 5px rgba(242,193,78,.2)}
+  .route li.ko:after{border-style:dashed;border-color:var(--muted)}
+  .route .d{font-size:12px;font-weight:800;letter-spacing:1.5px;color:var(--green);text-transform:uppercase}
+  .route .m{font-weight:800;font-size:17px;margin-top:2px;line-height:1.25}
+  .route .m em{font-style:normal;color:var(--gold)}
+  .route .s{font-size:13px;color:var(--muted);font-weight:600;margin-top:4px;line-height:1.45}
+  .route li.ko .m{color:var(--muted)}
+
+  .rivals{list-style:none;display:grid;gap:10px}
+  .rivals li{background:rgba(0,0,0,.18);border-radius:12px;padding:12px 14px}
+  .rivals .d{font-size:12px;font-weight:800;letter-spacing:1.5px;color:var(--green);text-transform:uppercase}
+  .rivals .m{font-weight:800;font-size:17px;margin:3px 0 4px;line-height:1.25}
+  .rivals .s{font-size:13px;color:var(--muted);font-weight:600;line-height:1.5}
+  /* STANDINGS */
+  table{width:100%;border-collapse:collapse;font-size:14px}
+  th{font-size:11px;letter-spacing:1px;color:var(--muted);text-transform:uppercase;font-weight:800;text-align:center;padding:6px 4px;border-bottom:1px solid var(--line)}
+  th:nth-child(2){text-align:left}
+  td{padding:10px 4px;text-align:center;border-bottom:1px solid rgba(255,255,255,.05);font-weight:600}
+  td:nth-child(2){text-align:left;font-weight:800;line-height:1.25}
+  td.pos{color:var(--muted);width:26px}
+  tr.q td.pos{color:var(--green)}
+  tr.me td{background:var(--gold-soft)} tr.me td:nth-child(2){color:var(--gold)}
+  td.pts{font-family:var(--display);font-size:20px;font-weight:400}
+  .note{font-size:12px;color:var(--muted);margin-top:12px;line-height:1.5}
+  .note b{color:var(--green)}
+
+  /* SECTIONS */
+  section{padding-top:46px}
+  .sec-h{display:flex;align-items:baseline;gap:14px;margin-bottom:16px;flex-wrap:wrap}
+  .sec-h h2{font-family:var(--display);font-weight:400;font-size:clamp(38px,8vw,54px);letter-spacing:1.5px;line-height:1}
+  .sec-h p{color:var(--muted);font-weight:600;font-size:14px}
+
+  .chips{display:flex;gap:8px;overflow-x:auto;padding-bottom:6px;margin-bottom:16px;scrollbar-width:none}
+  .chips::-webkit-scrollbar{display:none}
+  .chip{border:1px solid var(--line);background:transparent;border-radius:999px;padding:8px 14px;font-weight:700;font-size:13px;white-space:nowrap;color:var(--muted)}
+  .chip[aria-pressed="true"]{background:var(--text);color:var(--bg);border-color:var(--text)}
+  .chip.gold[aria-pressed="true"]{background:var(--gold);border-color:var(--gold);color:#1d1503}
+
+  .rounds{display:grid;gap:14px}
+  @media(min-width:900px){.rounds{grid-template-columns:1fr 1fr}}
+  .round{background:var(--card);border:1px solid var(--line);border-radius:18px;overflow:hidden}
+  .round-h{display:flex;align-items:center;gap:12px;padding:14px 16px;border-bottom:1px solid var(--line);background:rgba(55,201,120,.07)}
+  .round-h .n{font-family:var(--display);font-size:22px;letter-spacing:1px}
+  .round-h .dt{margin-left:auto;font-size:13px;font-weight:700;color:var(--muted)}
+  .round-h .dt b{color:var(--text)}
+  .round.past{opacity:.6}
+  .camp{font-size:11px;font-weight:800;letter-spacing:2px;color:var(--green);text-transform:uppercase;padding:10px 16px 0}
+  .g{display:grid;grid-template-columns:52px 1fr auto;align-items:center;gap:10px;padding:11px 16px}
+  .g+.g{border-top:1px dashed rgba(255,255,255,.07)}
+  .g .h{font-family:var(--display);font-size:21px;color:var(--gold)}
+  .g .tm{font-weight:700;font-size:14.5px;line-height:1.3}
+  .g .tm i{font-style:normal;color:var(--green);padding:0 6px;font-weight:800}
+  .g .gr{font-size:11px;font-weight:800;color:var(--muted);border:1px solid var(--line);border-radius:6px;padding:3px 7px}
+  .g.me{background:linear-gradient(90deg,rgba(242,193,78,.22),rgba(242,193,78,.03));box-shadow:inset 4px 0 0 var(--gold)}
+  .g.me .gr{background:var(--gold);color:#1d1503;border-color:var(--gold)}
+  .g.tbd .tm{color:var(--muted);font-style:italic;font-weight:600}
+  .empty{color:var(--muted);padding:20px;text-align:center}
+
+  .groups{display:grid;gap:14px;grid-template-columns:1fr}
+  @media(min-width:620px){.groups{grid-template-columns:1fr 1fr}}
+  .grp-card{padding:18px}
+  .grp-card h3{font-family:var(--display);font-weight:400;font-size:26px;letter-spacing:1px;margin-bottom:6px}
+  .grp-card.me{border-color:rgba(242,193,78,.45);background:var(--gold-soft)}
+  .grp-card.me h3{color:var(--gold)}
+
+  .bracket{display:grid;gap:14px}
+  @media(min-width:900px){.bracket{grid-template-columns:1fr 1fr 1fr;align-items:start}}
+  .stage h3{font-family:var(--display);font-weight:400;font-size:24px;letter-spacing:1px;color:var(--gold);margin-bottom:4px}
+  .stage .sd{font-size:13px;color:var(--muted);font-weight:700;margin-bottom:10px}
+  .slot{display:flex;justify-content:space-between;gap:10px;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px 14px;margin-bottom:8px;font-weight:700;font-size:14px}
+  .slot span:first-child{color:var(--muted);font-style:italic;font-weight:600}
+  .slot .h{font-family:var(--display);color:var(--gold);font-size:19px}
+  .stage.final .slot{border:2px solid var(--gold);background:var(--gold-soft)}
+  .stage.final .slot span:first-child{color:var(--text);font-style:normal;font-weight:800}
+
+  footer{margin:56px 0 0;padding:26px 0 40px;border-top:1px solid var(--line);color:var(--muted);font-size:13px;line-height:1.7}
+  footer b{color:var(--gold)}
+</style>
+</head>
+<body>
+
+<nav aria-label="Seções">
+  <div class="wrap">
+    <div class="brand">UNIÃO <b>FC</b></div>
+    <a href="#uniao" class="on">União</a>
+    <a href="#tabela">Tabela</a>
+    <a href="#grupos">Grupos</a>
+    <a href="#matamata">Mata-mata</a>
+  </div>
+</nav>
+
+<main class="wrap">
+  <header id="uniao">
+    <div class="eyebrow">Copa Society 2026 · Categoria Livre</div>
+    <h1>VAMOS, <span>UNIÃO</span></h1>
+    <p class="lede">Grupo D · 3 jogos na 1ª fase · 17/10 a 24/11</p>
+
+    <div class="grid">
+      <div class="card next" id="nextCard" aria-live="polite"></div>
+
+      <div class="card">
+        <h2>Campanha <small>1ª fase → final</small></h2>
+        <ol class="route" id="route"></ol>
+      </div>
+    </div>
+
+    <div class="grid">
+      <div class="card">
+        <h2>Classificação · Grupo D <small id="updTag"></small></h2>
+        <div id="standD"></div>
+        <p class="note"><b>●</b> Os 2 primeiros de cada grupo vão às quartas de final (jogo único, confrontos por sorteio).</p>
+      </div>
+      <div class="card">
+        <h2>Adversários no grupo</h2>
+        <ul class="rivals" id="rivals"></ul>
+      </div>
+    </div>
+  </header>
+
+  <section id="tabela">
+    <div class="sec-h"><h2>Tabela completa</h2><p>31 jogos · horários de Brasília</p></div>
+    <div class="chips" role="group" aria-label="Filtrar jogos" id="chips"></div>
+    <div class="rounds" id="rounds"></div>
+  </section>
+
+  <section id="grupos">
+    <div class="sec-h"><h2>Grupos</h2><p>16 times · 4 grupos</p></div>
+    <div class="groups" id="groups"></div>
+  </section>
+
+  <section id="matamata">
+    <div class="sec-h"><h2>Mata-mata</h2><p>Jogo único · confrontos por sorteio</p></div>
+    <div class="bracket">
+      <div class="stage">
+        <h3>Quartas de final</h3><div class="sd">Sábado, 07/11</div>
+        <div class="slot"><span>Jogo 1 · sorteio</span><span class="h">14:30</span></div>
+        <div class="slot"><span>Jogo 2 · sorteio</span><span class="h">15:20</span></div>
+        <div class="slot"><span>Jogo 3 · sorteio</span><span class="h">16:10</span></div>
+        <div class="slot"><span>Jogo 4 · sorteio</span><span class="h">17:00</span></div>
+      </div>
+      <div class="stage">
+        <h3>Semifinal</h3><div class="sd">Sábado, 14/11</div>
+        <div class="slot"><span>Jogo 1 · sorteio</span><span class="h">14:30</span></div>
+        <div class="slot"><span>Jogo 2 · sorteio</span><span class="h">15:20</span></div>
+      </div>
+      <div class="stage final">
+        <h3>Final</h3><div class="sd">Terça, 24/11</div>
+        <div class="slot"><span>Venc. J1 × Venc. J2</span><span class="h">19:30</span></div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <b>★ União FC</b> em destaque em toda a página.<br>
+    Tabela oficial da organização · sujeita a alterações. A 4ª rodada consta como 27/07 no documento original; aqui está como <b>27/10 (terça)</b>.<br>
+    Página atualizada em <span id="upd"></span>.
+  </footer>
+</main>
+
+<script>
+/* ======== DADOS — para atualizar placares, preencha "p" com [gols mandante, gols visitante] ======== */
+const UPDATED = "2026-10-13";
+const ME = "UNIÃO FC";
+const GROUPS = {
+  A:["SAT","REAL FC","FURIA FC","SC PELE REI"],
+  B:["INOVAGRO FC","SANTA TERÇA FC/VASCO DA BRAHMA","RFC","CORONA FC"],
+  C:["VILA FC","PORTO FC","JUVENTUS","CHULAPA FC"],
+  D:["UNIÃO FC","COLOMBIA FC","NA HANDS","PAYSANDUBA FC"]
+};
+const ROUNDS = [
+  {n:1,date:"2026-10-17",wd:"Sábado",games:[
+    ["14:30","C",1,"JUVENTUS","VILA FC"],["15:20","B",1,"RFC","SANTA TERÇA FC/VASCO DA BRAHMA"],
+    ["16:10","B",1,"INOVAGRO FC","CORONA FC"],["17:00","A",1,"FURIA FC","SC PELE REI"],["17:00","A",2,"SAT","REAL FC"]]},
+  {n:2,date:"2026-10-20",wd:"Terça",games:[
+    ["19:15","C",0,"CHULAPA FC","PORTO FC"],["20:05","D",0,"NA HANDS","COLOMBIA FC"],["20:55","D",0,"PAYSANDUBA FC","UNIÃO FC"]]},
+  {n:3,date:"2026-10-24",wd:"Sábado",games:[
+    ["14:30","D",1,"UNIÃO FC","NA HANDS"],["15:20","A",1,"SC PELE REI","REAL FC"],["16:10","C",1,"PORTO FC","VILA FC"],
+    ["17:00","C",1,"CHULAPA FC","JUVENTUS"],["17:00","D",2,"PAYSANDUBA FC","COLOMBIA FC"]]},
+  {n:4,date:"2026-10-27",wd:"Terça",games:[
+    ["19:15","A",0,"FURIA FC","SAT"],["20:05","B",0,"SANTA TERÇA FC/VASCO DA BRAHMA","CORONA FC"],["20:55","B",0,"RFC","INOVAGRO FC"]]},
+  {n:5,date:"2026-10-31",wd:"Sábado",games:[
+    ["14:30","B",1,"INOVAGRO FC","SANTA TERÇA FC/VASCO DA BRAHMA"],["15:20","D",1,"NA HANDS","PAYSANDUBA FC"],
+    ["16:10","C",1,"VILA FC","CHULAPA FC"],["17:00","D",1,"COLOMBIA FC","UNIÃO FC"],["17:00","B",2,"CORONA FC","RFC"]]},
+  {n:6,date:"2026-11-04",wd:"Quarta",games:[
+    ["19:15","A",0,"SAT","SC PELE REI"],["20:05","A",0,"REAL FC","FURIA FC"],["20:55","C",0,"JUVENTUS","PORTO FC"]]}
+];
+const KO = [
+  {n:"Quartas de final",date:"2026-11-07",wd:"Sábado",ko:true,games:[["14:30","Q",0,"Jogo 1 · sorteio"],["15:20","Q",0,"Jogo 2 · sorteio"],["16:10","Q",0,"Jogo 3 · sorteio"],["17:00","Q",0,"Jogo 4 · sorteio"]]},
+  {n:"Semifinal",date:"2026-11-14",wd:"Sábado",ko:true,games:[["14:30","S",0,"Jogo 1 · sorteio"],["15:20","S",0,"Jogo 2 · sorteio"]]},
+  {n:"Final",date:"2026-11-24",wd:"Terça",ko:true,games:[["19:30","F",0,"Venc. J1 × Venc. J2"]]}
+];
+const RESULTS = {}; // ex.: {"2-PAYSANDUBA FC":[1,3]}  (rodada-mandante)
+
+/* ======== HELPERS ======== */
+const $ = s => document.querySelector(s);
+const short = t => t.replace("SANTA TERÇA FC/VASCO DA BRAHMA","STA TERÇA/VASCO DA BRAHMA");
+const fmtD = d => d.slice(8,10)+"/"+d.slice(5,7);
+const when = (d,h) => new Date(`${d}T${h}:00-03:00`);
+const mine = g => g[3]===ME || g[4]===ME;
+const esc = s => s.replace(/[&<>]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;"}[c]));
+const now = new Date();
+
+const myGames = [];
+ROUNDS.forEach(r=>r.games.forEach(g=>{ if(mine(g)) myGames.push({r,g,t:when(r.date,g[0])}); }));
+
+/* ======== ICS (botão "Adicionar à agenda") ======== */
+function ics(title, start, mins, desc){
+  const z = d => d.toISOString().replace(/[-:]/g,"").replace(/\.\d{3}/,"");
+  const end = new Date(start.getTime()+mins*60000);
+  const body = ["BEGIN:VCALENDAR","VERSION:2.0","PRODID:-//Uniao FC//PT-BR","BEGIN:VEVENT",
+    "UID:"+z(start)+"-uniao@copasociety","DTSTAMP:"+z(new Date()),"DTSTART:"+z(start),"DTEND:"+z(end),
+    "SUMMARY:"+title,"DESCRIPTION:"+desc,
+    "BEGIN:VALARM","ACTION:DISPLAY","TRIGGER:-P1D","DESCRIPTION:Jogo do UNIÃO amanhã!","END:VALARM",
+    "BEGIN:VALARM","ACTION:DISPLAY","TRIGGER:-PT1H","DESCRIPTION:Jogo do UNIÃO em 1 hora!","END:VALARM",
+    "END:VEVENT","END:VCALENDAR"].join("\r\n");
+  return "data:text/calendar;charset=utf-8,"+encodeURIComponent(body);
+}
+function gcal(title, start, mins, desc){
+  const z = d => d.toISOString().replace(/[-:]/g,"").replace(/\.\d{3}/,"");
+  const end = new Date(start.getTime()+mins*60000);
+  return "https://calendar.google.com/calendar/render?action=TEMPLATE&text="+encodeURIComponent(title)+
+    "&dates="+z(start)+"/"+z(end)+"&details="+encodeURIComponent(desc)+"&ctz=America/Sao_Paulo";
+}
+
+/* ======== PRÓXIMO JOGO ======== */
+function renderNext(){
+  const nx = myGames.find(m=>m.t.getTime()+50*60000 > Date.now());
+  const el = $("#nextCard");
+  if(!nx){
+    el.innerHTML = `<span class="tag">Fase de grupos encerrada</span>
+      <div class="vs"><div class="t me">UNIÃO</div><div class="x">→</div><div class="t">QUARTAS?</div></div>
+      <p class="when">Quartas de final · <b>Sáb 07/11</b> · confrontos por sorteio</p>`;
+    return;
+  }
+  const {r,g,t} = nx;
+  const opp = g[3]===ME ? g[4] : g[3];
+  const home = g[3]===ME;
+  const title = `⭐ ${g[3]} × ${g[4]} · Copa Society 2026`;
+  const desc = `Rodada ${r.n} · Grupo ${g[1]}${g[2]?" · Campo "+g[2]:""}`;
+  const live = Date.now() >= t.getTime();
+  el.innerHTML = `<span class="tag">${live?"Rolando agora":"Próximo jogo"}</span>
+    <div class="vs">
+      <div class="t ${home?"me":""}">${esc(short(home?ME:opp))}</div>
+      <div class="x">×</div>
+      <div class="t ${home?"":"me"}">${esc(short(home?opp:ME))}</div>
+    </div>
+    <div class="when"><span><b>${r.wd}, ${fmtD(r.date)}</b></span><span>às <b>${g[0]}</b></span><span>Rodada <b>${r.n}</b></span>${g[2]?`<span>Campo <b>${g[2]}</b></span>`:""}</div>
+    <div class="count" id="cd"></div>
+    <div class="btns">
+      <a class="btn" href="${gcal(title,t,50,desc)}" target="_blank" rel="noopener">Salvar no Google Agenda</a>
+      <a class="btn ghost" href="${ics(title,t,50,desc)}" download="uniao-rodada-${r.n}.ics">Baixar lembrete (.ics)</a>
+    </div>`;
+  const tick = ()=>{
+    let s = Math.max(0, Math.floor((t - Date.now())/1000));
+    const d=Math.floor(s/86400); s%=86400; const h=Math.floor(s/3600); s%=3600; const m=Math.floor(s/60); s%=60;
+    const cd = document.getElementById("cd"); if(!cd) return;
+    cd.innerHTML = [[d,"dias"],[h,"horas"],[m,"min"],[s,"seg"]].map(([v,l])=>`<div><b>${String(v).padStart(2,"0")}</b><span>${l}</span></div>`).join("");
+  };
+  tick(); setInterval(tick,1000);
+}
+
+/* ======== CAMPANHA ======== */
+function renderRoute(){
+  const nextIdx = myGames.findIndex(m=>m.t.getTime()+50*60000 > Date.now());
+  let html = myGames.map((m,i)=>{
+    const {r,g} = m; const res = RESULTS[r.n+"-"+g[3]];
+    const cls = i<nextIdx||nextIdx===-1 ? "done" : i===nextIdx ? "now" : "";
+    const score = res ? ` <em>${res[0]} × ${res[1]}</em>` : "";
+    const opp = g[3]===ME ? g[4] : g[3];
+    return `<li class="${cls}"><div class="d">${r.wd} ${fmtD(r.date)} · ${g[0]}</div>
+      <div class="m">${g[3]===ME?"<em>União</em> × "+esc(short(opp)):esc(short(opp))+" × <em>União</em>"}${score}</div>
+      <div class="s">Rodada ${r.n}${g[2]?" · Campo "+g[2]:""}</div></li>`;
+  }).join("");
+  html += KO.map(k=>`<li class="ko"><div class="d">${k.wd} ${fmtD(k.date)}</div><div class="m">${k.n}</div><div class="s">Se classificar · ${k.games[0][0]}</div></li>`).join("");
+  $("#route").innerHTML = html;
+}
+
+/* ======== CLASSIFICAÇÃO ======== */
+function standings(grp){
+  const T = {}; GROUPS[grp].forEach(t=>T[t]={t,j:0,v:0,e:0,d:0,gp:0,gc:0,p:0});
+  ROUNDS.forEach(r=>r.games.forEach(g=>{
+    if(g[1]!==grp) return; const res = RESULTS[r.n+"-"+g[3]]; if(!res) return;
+    const a=T[g[3]], b=T[g[4]]; if(!a||!b) return;
+    a.j++;b.j++;a.gp+=res[0];a.gc+=res[1];b.gp+=res[1];b.gc+=res[0];
+    if(res[0]>res[1]){a.v++;a.p+=3;b.d++}else if(res[0]<res[1]){b.v++;b.p+=3;a.d++}else{a.e++;b.e++;a.p++;b.p++}
+  }));
+  return Object.values(T).sort((x,y)=>y.p-x.p||(y.gp-y.gc)-(x.gp-x.gc)||y.gp-x.gp||x.t.localeCompare(y.t));
+}
+function tableHTML(grp){
+  const rows = standings(grp).map((s,i)=>`<tr class="${i<2?"q":""} ${s.t===ME?"me":""}"><td class="pos">${i+1}</td><td>${esc(short(s.t))}</td><td>${s.j}</td><td>${s.v}</td><td>${s.e}</td><td>${s.d}</td><td>${s.gp-s.gc}</td><td class="pts">${s.p}</td></tr>`).join("");
+  return `<table><thead><tr><th>#</th><th>Time</th><th>J</th><th>V</th><th>E</th><th>D</th><th>SG</th><th>Pts</th></tr></thead><tbody>${rows}</tbody></table>`;
+}
+
+/* ======== ADVERSÁRIOS ======== */
+function renderRivals(){
+  $("#rivals").innerHTML = myGames.map(({r,g})=>{
+    const opp = g[3]===ME ? g[4] : g[3];
+    const others = [];
+    ROUNDS.forEach(rr=>rr.games.forEach(gg=>{ if(!mine(gg)&&(gg[3]===opp||gg[4]===opp)) others.push(`${fmtD(rr.date)} vs ${short(gg[3]===opp?gg[4]:gg[3])}`); }));
+    return `<li><div class="d">Rodada ${r.n} · ${fmtD(r.date)}</div><div class="m">${esc(short(opp))}</div><div class="s">Outros jogos: ${others.map(esc).join(" · ")}</div></li>`;
+  }).join("");
+}
+
+/* ======== TABELA COMPLETA ======== */
+let filter = "ME";
+function renderChips(){
+  const opts = [["ME","★ Só União"],["ALL","Todos"],["A","Grupo A"],["B","Grupo B"],["C","Grupo C"],["D","Grupo D"],["KO","Mata-mata"]];
+  $("#chips").innerHTML = opts.map(([k,l])=>`<button class="chip ${k==="ME"?"gold":""}" data-k="${k}" aria-pressed="${k===filter}">${l}</button>`).join("");
+  $("#chips").querySelectorAll("button").forEach(b=>b.onclick=()=>{filter=b.dataset.k;renderChips();renderRounds();});
+}
+function gameHTML(g, ko){
+  if(ko) return `<div class="g tbd"><span class="h">${g[0]}</span><span class="tm">${g[3]}</span><span></span></div>`;
+  const res = RESULTS[ROUNDS.find(r=>r.games.includes(g)).n+"-"+g[3]];
+  const mid = res ? `<i>${res[0]} × ${res[1]}</i>` : "<i>×</i>";
+  return `<div class="g ${mine(g)?"me":""}"><span class="h">${g[0]}</span><span class="tm">${esc(short(g[3]))}${mid}${esc(short(g[4]))}</span><span class="gr">${mine(g)?"★ ":""}GRP ${g[1]}</span></div>`;
+}
+function renderRounds(){
+  const list = [...ROUNDS, ...KO];
+  const html = list.map(r=>{
+    let gs = r.games;
+    if(r.ko){ if(!["ALL","KO"].includes(filter)) return ""; }
+    else { if(filter==="KO") return "";
+      if(filter==="ME") gs = gs.filter(mine);
+      else if(filter!=="ALL") gs = gs.filter(g=>g[1]===filter); }
+    if(!gs.length) return "";
+    const past = when(r.date,"23:59") < now;
+    const hasCampos = !r.ko && gs.some(g=>g[2]);
+    let body = "";
+    if(hasCampos){ [1,2].forEach(c=>{ const cg=gs.filter(g=>g[2]===c); if(cg.length) body += `<div class="camp">Campo ${c}</div>`+cg.map(g=>gameHTML(g)).join(""); }); }
+    else body = gs.map(g=>gameHTML(g,r.ko)).join("");
+    const label = r.ko ? r.n : `Rodada ${r.n}`;
+    return `<article class="round ${past?"past":""}"><div class="round-h"><span class="n">${label}</span><span class="dt">${r.wd} · <b>${fmtD(r.date)}</b></span></div>${body}</article>`;
+  }).join("");
+  $("#rounds").innerHTML = html || `<div class="empty">Nenhum jogo neste filtro.</div>`;
+}
+
+/* ======== GRUPOS ======== */
+function renderGroups(){
+  $("#groups").innerHTML = Object.keys(GROUPS).map(k=>`<div class="card grp-card ${GROUPS[k].includes(ME)?"me":""}"><h3>Grupo ${k}${GROUPS[k].includes(ME)?" ★":""}</h3>${tableHTML(k)}</div>`).join("");
+}
+
+/* ======== NAV ATIVA ======== */
+function navSpy(){
+  const links=[...document.querySelectorAll("nav a")]; const secs=links.map(a=>document.querySelector(a.getAttribute("href")));
+  const on=()=>{ let i=0; secs.forEach((s,k)=>{ if(s.getBoundingClientRect().top<120) i=k; }); links.forEach((a,k)=>a.classList.toggle("on",k===i)); };
+  addEventListener("scroll",on,{passive:true}); on();
+}
+
+renderNext(); renderRoute(); renderRivals(); renderChips(); renderRounds(); renderGroups(); navSpy();
+$("#standD").innerHTML = tableHTML("D");
+const u = fmtD(UPDATED)+"/"+UPDATED.slice(0,4);
+$("#upd").textContent = u; $("#updTag").textContent = "atualizada "+fmtD(UPDATED);
+</script>
+<script type="module" src="https://static.cloudflareinsights.com/beacon.min.js/v4bc70e2c01a94c73b74392e4234840661791215815920" integrity="sha512-L0ha0OXavK/8okipN9F8BtP84dg9DUhPERbBXzwI6dgTA55d2+yweo3pn5CSFYs45/r8md2+xvUPtTdvTNRfjA==" data-cf-beacon='{"version":"2024.11.0","token":"4edd5f8ec12a48cfa682ab8261b80a79","spa":2}' crossorigin="anonymous"></script>
+</body>
+</html>
